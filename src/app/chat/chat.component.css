@@ -2,4 +2,15 @@
     margin-top: 20px;
     padding-top: 30px;
     padding-bottom: 30px;
+    background-color: #fff;
+}
+
+#typed{
+    font-family: "Source Sans Pro",Helvetica,Arial,Sans-Serif;
+    color: #696A75;
+    font-size: 20px;
+    line-height: 2rem;
+    letter-spacing: 0;
+    font-weight: 300!important;
+    white-space: pre-wrap;
 }

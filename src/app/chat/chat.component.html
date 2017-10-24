@@ -2,7 +2,14 @@
   <div class="jumbotron">
     <div class="row">
       <div class="col">
-          <span>tes</span>
+        <span id="typed"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="d-flex justify-content-center">
+          <div id="showBtn" style="display:none"><app-botao-decisao  (onVoted)="onVoted($event)"></app-botao-decisao></div>
+        </div>        
       </div>
     </div>
   </div>
