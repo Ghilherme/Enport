@@ -10,6 +10,7 @@ import { fadeInAnimation } from '../_animations/index';
 export class BotaoDecisaoComponent implements OnInit {
 
   @Output() onVoted = new EventEmitter<boolean>();
+  @Input() btnText:string
 
   constructor() { }
 
@@ -18,7 +19,6 @@ export class BotaoDecisaoComponent implements OnInit {
 
   public verificaProgresso() {
     this.onVoted.emit();
-    //console.log(this.progresso)
   }
 
 }

@@ -1,8 +1,16 @@
 .jumbotron{
     margin-top: 20px;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 48px;
     background-color: #fff;
+}
+
+#chatRow{
+    padding-bottom: 48px;  
+}
+
+#chatCol{
+    padding-bottom: 48px;
 }
 
 #typed{
@@ -13,4 +21,9 @@
     letter-spacing: 0;
     font-weight: 300!important;
     white-space: pre-wrap;
+}
+
+.containerJumbotron{
+    display: none;
+    margin-top: 20px;
 }

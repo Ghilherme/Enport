@@ -1,6 +1,11 @@
-<button 
-    id="btn_next"  
-    type="button" 
-    class="btn btn-primary"
-    (click)="verificaProgresso()"
->Próximo</button>
+<div class="btnContainer ">
+    <div class="d-flex justify-content-center">
+        <button 
+            id="btn_next"  
+            type="button" 
+            class="btn btn-primary"
+            (click)="verificaProgresso()"
+            >{{btnText}}
+        </button>
+    </div>
+</div>

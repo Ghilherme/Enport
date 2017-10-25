@@ -1,17 +1,14 @@
 <div class="container">
   <div class="jumbotron">
-    <div class="row">
-      <div class="col">
+    <div id="chatRow" class="row">
+      <div id="chatCol" class="col">
         <div id="chat"><span id="typed"></span>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="d-flex justify-content-center">
-          <div id="showBtn" style="display:none"><app-botao-decisao  (onVoted)="onVoted($event)"></app-botao-decisao></div>
-        </div>        
-      </div>
-    </div>
   </div>
+</div>
+
+<div id="showBtn" class="containerJumbotron">
+  <app-botao-decisao [btnText]="btnText"  (onVoted)="onVoted($event)"></app-botao-decisao>
 </div>
