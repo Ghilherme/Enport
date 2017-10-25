@@ -21,43 +21,44 @@ export class ChatComponent implements OnInit {
   public historias: Historia[] = HISTORIA
   public progresso:number = 0
   public showBtn:boolean = false
+  public typed:any
+  public countSpan:number = 1
 
   
-  
-
   constructor() { }
 
   ngOnInit() {  
-    //this.chamaTyping(0)
-    var typed = new Typed("#typed", {
-      strings: [this.historias[this.progresso].frase],
+      this.typed = new Typed("#typed", {
+      strings: ["<span id='typed"+this.progresso+"'>"+ this.historias[this.progresso].frase +
+               "</span><br><span id='typed"+this.countSpan+"'></span>"],
       typeSpeed: 0,
-      backSpeed: 0,
-      backDelay: 500,
       startDelay: 1000,
+      cursorChar: "",
       loop: false,
       onComplete: function(self) {          
           $( "#showBtn" ).fadeIn( "slow", function() {    });
         },
     })  
+    
   }
 
   private onVoted() {
+    $( "#showBtn" ).fadeOut( "fast", function() {    });
     this.progresso++
-    console.log(this.progresso)
+    this.countSpan++
 
-    let typed = new Typed("#typed", {
-      strings: [this.historias[this.progresso].frase],
-      typeSpeed: 0,
-      backSpeed: 0,
-      backDelay: 500,
-      startDelay: 1000,
-      loop: false,
-      onComplete: function(self) {          
-          $( "#showBtn" ).fadeIn( "slow", function() {    });
-        },
-    })
-    
+    var typ = new Typed("#typed" + this.progresso, {
+    strings: ["<span id='typed"+this.progresso+"'>"+ this.historias[this.progresso].frase +
+              "</span><br><span id='typed"+this.countSpan+"'></span>"],
+    typeSpeed: 0,
+    startDelay: 500,
+    cursorChar: "",
+    loop: false,
+    onComplete: function(self) {          
+        $( "#showBtn" ).fadeIn( "slow", function() {    });
+      },
+    })  
+
   }
 
 }
