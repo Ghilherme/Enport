@@ -1,11 +1,11 @@
 <div class="btnContainer ">
-    <div class="d-flex justify-content-center">
+    <div *ngFor="let botoes of botaoCarregado" class="d-flex justify-content-center">
         <button 
-            id="btn_next"  
+            id="btn_next"
             type="button" 
             class="btn btn-primary"
-            (click)="verificaProgresso()"
-            >{{btnText}}
+            (click)="verificaProgresso(botoes.iddecisao)"
+            >{{botoes.texto}} 
         </button>
     </div>
 </div>

@@ -1,3 +1,3 @@
 export default class Historia{
-    constructor(public frase:string, public id:number){}
+    constructor(public id:number,public frase:string, public iddecisao:number){}
 }

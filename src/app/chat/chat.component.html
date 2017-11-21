@@ -10,5 +10,6 @@
 </div>
 
 <div id="showBtn" class="containerJumbotron">
-  <app-botao-decisao [btnText]="btnText"  (onVoted)="onVoted($event)"></app-botao-decisao>
+  <!--<app-botao-decisao [progresso]="progresso" [btnText]="btnText"  (onVoted)="onVoted($event)"></app-botao-decisao>-->
+  <app-botao-decisao [progresso]="progresso" (ClicarBotaoDecisao)="ClicarBotaoDecisao($event)"></app-botao-decisao>
 </div>
