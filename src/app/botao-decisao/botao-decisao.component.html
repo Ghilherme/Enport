@@ -1,11 +1,11 @@
-<div class="btnContainer ">
+<div *ngIf="flagShowButton" [@enterAnimation] class="btnContainer ">
     <div *ngFor="let botoes of botaoCarregado" class="d-flex justify-content-center">
         <button 
             id="btn_next"
             type="button" 
             class="btn btn-primary"
             (click)="verificaProgresso(botoes.iddecisao)"
-            >{{botoes.texto}} 
+            >{{botoes.texto}}
         </button>
     </div>
 </div>

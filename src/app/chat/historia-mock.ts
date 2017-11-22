@@ -12,5 +12,5 @@ export const HISTORIA: Historia[] = [
     {id:5, frase: "6 - Regina nunca teve filhos mas considera todos daquela rua como netos.^500 Ela sempre atende muito rápido,^300 porém hoje não está respondendo e eu tenho exatamente 26 minutos para estar dormindo,^300 porque se meus pais chegarem,^300 terei que cumprir o castigo de 2 semanas sem futebol. ", iddecisao:1},
     {id:6, frase: "7 - Você sabe o que significa 2 semanas sem futebol?^500 bom,^300 significa que o nosso time vai ter um grande desfalque,^500 considerando que o Gilson também pegou 3 jogos de castigo com a sua mãe por quebrar a geladeira jogando bola dentro de casa e o Ricardo estar contundido por 2 semanas. ", iddecisao:1},
     {id:7, frase: "8 - Ricardo está contundido porque apanhou dos pais por esquecer a panela de miojo no fogo e queimar a cortina da cozinha. ", iddecisao:1},
-    {id:8, frase: "9 - m,^300 o prejuízo é grande,^300 por isso eu preciso resolver logo essa situação e estar dormindo quando meus pais chegarem. ", iddecisao:1},
+    {id:8, frase: "9 - Enfim,^300 o prejuízo é grande,^300 por isso eu preciso resolver logo essa situação e estar dormindo quando meus pais chegarem. ", iddecisao:1},
 ]

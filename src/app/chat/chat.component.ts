@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 //***JS frameworks
 import * as  Typed  from '../../../node_modules/typed.js/lib/typed.min.js';
@@ -13,7 +13,6 @@ import BotaoDecisao from '../shared/botao-decisao.model'
 import {BOTAODECISAO} from '../botao-decisao/botao-decisao-mock'
 import { BotaoDecisaoComponent } from '../botao-decisao/botao-decisao.component';
 
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -24,30 +23,24 @@ export class ChatComponent implements OnInit {
   public historias: Historia[] = HISTORIA
   public botaodecisao: BotaoDecisao[] = BOTAODECISAO
   public progresso:number = 0
-  public showBtn:boolean = false
   public typed:any
   public countSpan:number = 1
-  public btnText:string
   public botaoCarregado: BotaoDecisao[] = []
   public contadorHistorias: number = 0
+  public flagShowButton:boolean = false
 
-  
   constructor() { }
 
   ngOnInit() {
 
     this.CarregarHistorias(1,true,0, 1000, "", false,false)
-
-    //this.CarregarBotaoDecisao()
-
   }
   
   private ClicarBotaoDecisao($event){
+    this.flagShowButton = false
+
     // $event pega o parametro do emitter
     let iddecisao: number = $event
-    
-    //fade dos botoes
-    this.EfeitoCarregarBotoes()
 
     //incrementa contagem de frases
     this.progresso++
@@ -57,9 +50,7 @@ export class ChatComponent implements OnInit {
 
     //Carrega as linhas com typed passando parametros
     this.CarregarHistorias(iddecisao,false,0, 500, "", false,true)
-
   }
-
 
   private CarregarHistorias(iddecisao: number,start: boolean,typeSpeed:number, startDelay:number, cursorChar:String,loop:boolean,onStringTyped:boolean){
     let typed : string
@@ -70,9 +61,8 @@ export class ChatComponent implements OnInit {
       typed = "#typed"
     }
     
+    var selfchat = this
     var typ = new Typed(typed, {
-      /*strings: ["<span id='typed"+this.progresso+"'>"+ this.historias[this.progresso].frase +
-                "</span><br><span id='typed"+this.countSpan+"'></span>"],*/
       strings: ["<span id='typed"+this.progresso+"'>"+ this.AcharHistoria(iddecisao) +
                 "</span><br><span id='typed"+this.countSpan+"'></span>"],
       typeSpeed: typeSpeed,
@@ -80,7 +70,7 @@ export class ChatComponent implements OnInit {
       cursorChar: cursorChar,
       loop: loop,
       onComplete: function(self) {          
-          $( "#showBtn" ).fadeIn( "slow", function() {    });
+          selfchat.flagShowButton = true
         },
       onStringTyped: function(){
           if (onStringTyped = true){
@@ -88,32 +78,28 @@ export class ChatComponent implements OnInit {
           }
         }
       })
-
   }
 
   private AcharHistoria(iddecisao: number){
     let texto: string 
-    //let idinicial = this.historias[this.progresso].id
     let idinicial = this.historias[this.contadorHistorias].id
-    //for(let contador:number = this.progresso; this.historias[contador].id == idinicial; contador++){
-    for(let contador:number = this.contadorHistorias; this.historias[contador].id == idinicial; contador++){
-      
-      if(this.historias[contador].iddecisao == iddecisao){
-        texto = this.historias[contador].frase
-      }
-      //console.log("idinicial: "+ idinicial)
-      //console.log("contador: "+ contador) 
-      //console.log("historias: ID: "+ this.historias[contador].id +" FRASE : "+ this.historias[contador].frase+" IDdecisao : "+ this.historias[contador].iddecisao)
-      this.contadorHistorias++
-      console.log("Historia no for  "+this.contadorHistorias)
+    
+    //Se chegou na ultima historia
+    if(this.historias[this.contadorHistorias].id === this.historias[this.historias.length-1].id){
+      texto= this.historias[this.contadorHistorias].frase
+      return texto;
     }
-    console.log("Historia saiu for  "+this.contadorHistorias)
-    return texto;
+    else{      
+      
+      for(let contador:number = this.contadorHistorias; this.historias[contador].id == idinicial; contador++){
+        
+        if(this.historias[contador].iddecisao == iddecisao){
+          texto = this.historias[contador].frase
+        }
+        this.contadorHistorias++
+      }
+      return texto;
+    }
 
   }
-
-  private EfeitoCarregarBotoes(){
-    $( "#showBtn" ).fadeOut( "fast", function() {    });
-  }
-
 }
