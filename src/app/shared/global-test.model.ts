@@ -1,0 +1,1 @@
+export const contadorParaTeste: number = 0

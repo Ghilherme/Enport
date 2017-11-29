@@ -7,6 +7,8 @@ import { fadeInAnimation } from '../_animations/index';
 import BotaoDecisao from '../shared/botao-decisao.model'
 import {BOTAODECISAO} from '../botao-decisao/botao-decisao-mock'
 
+import {contadorParaTeste} from '../shared/global-test.model'
+
 @Component({
   selector: 'app-botao-decisao',
   templateUrl: './botao-decisao.component.html',
@@ -32,7 +34,7 @@ export class BotaoDecisaoComponent implements OnInit {
   @Output() ClicarBotaoDecisao = new EventEmitter<number>();
   public cargaDeBotoes: BotaoDecisao[] = BOTAODECISAO
   public botaoCarregado : BotaoDecisao[] =[]
-  public ContadorProgressoBotao: number = 0
+  public ContadorProgressoBotao: number = contadorParaTeste
 
   @Input() flagShowButton: boolean
 

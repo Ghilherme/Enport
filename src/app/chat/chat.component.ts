@@ -13,6 +13,8 @@ import BotaoDecisao from '../shared/botao-decisao.model'
 import {BOTAODECISAO} from '../botao-decisao/botao-decisao-mock'
 import { BotaoDecisaoComponent } from '../botao-decisao/botao-decisao.component';
 
+import {contadorParaTeste} from '../shared/global-test.model'
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -26,7 +28,7 @@ export class ChatComponent implements OnInit {
   public typed:any
   public countSpan:number = 1
   public botaoCarregado: BotaoDecisao[] = []
-  public contadorHistorias: number = 0
+  public contadorHistorias: number = contadorParaTeste
   public flagShowButton:boolean = false
 
   constructor() { }
@@ -83,16 +85,30 @@ export class ChatComponent implements OnInit {
   private AcharHistoria(iddecisao: number){
     let texto: string 
     let idinicial = this.historias[this.contadorHistorias].id
-    
+    let indexfinal: number = 1
+
+  
     //Se chegou na ultima historia
-    if(this.historias[this.contadorHistorias].id === this.historias[this.historias.length-1].id){
-      texto= this.historias[this.contadorHistorias].frase
-      return texto;
+    //se é o ultimo ID de historias -- tratamento especial para final com varios historias possiveis
+    if(this.historias[this.contadorHistorias].id === this.historias[this.historias.length -1].id){
+      //Se é o ultimo Index do array retorna o ultimo texto normalmente
+      if(this.historias[this.contadorHistorias] === this.historias[this.historias.length-1]){
+        texto= this.historias[this.contadorHistorias].frase
+        return texto;
+      }
+      //senao itera no array no ultimo id de historias ate achar o iddecisao correto
+      else{
+        for(indexfinal = 1; this.historias[this.contadorHistorias].iddecisao !== iddecisao;indexfinal++){
+          this.contadorHistorias++
+        }        
+        texto = this.historias[this.contadorHistorias].frase
+        return texto
+      }
     }
+    //Meio da historia 
     else{      
-      
       for(let contador:number = this.contadorHistorias; this.historias[contador].id == idinicial; contador++){
-        
+
         if(this.historias[contador].iddecisao == iddecisao){
           texto = this.historias[contador].frase
         }
