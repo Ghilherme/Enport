@@ -13,11 +13,11 @@
     padding-bottom: 48px;
 }
 
-#typed{
+.typed{
     font-family: "Source Sans Pro",Helvetica,Arial,Sans-Serif;
     color: #696A75;
-    font-size: 22px;
-    line-height: 2rem;
+    font-size: 18px;
+    line-height: 1.5rem;
     letter-spacing: 0;
     font-weight: 300!important;
     white-space: pre-wrap;
@@ -26,4 +26,12 @@
 .containerJumbotron{
     /*display: none;*/
     margin-top: 20px;
+}
+
+.container{
+    max-width: 960px;
+}
+
+#chat{
+    height:100%;
 }

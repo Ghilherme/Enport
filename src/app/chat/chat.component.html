@@ -2,7 +2,13 @@
   <div class="jumbotron">
     <div id="chatRow" class="row">
       <div id="chatCol" class="col">
-        <div id="chat"><span id="typed"></span>
+        <div id="chat">
+          <div *ngFor="let span of spans" >
+            <p>
+              
+              <span [id]="span" class="typed" ></span>
+            </p>
+          </div><br>
         </div>
       </div>
     </div>

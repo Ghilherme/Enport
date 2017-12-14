@@ -28,5 +28,9 @@ export const BOTAODECISAO: BotaoDecisao[] = [
     {id:17, texto: "2+", iddecisao:3},
     {id:17, texto: "50+", iddecisao:4},
 
-    {id:18, texto: "Fim", iddecisao:1},
+    {id:18, texto: "Próximo", iddecisao:1},
+
+    {id:19, texto: "Básico", iddecisao:1},
+    {id:19, texto: "Intermediário", iddecisao:2},
+    {id:19, texto: "Avançado", iddecisao:3},
 ]

@@ -14,12 +14,14 @@ import {BOTAODECISAO} from '../botao-decisao/botao-decisao-mock'
 import { BotaoDecisaoComponent } from '../botao-decisao/botao-decisao.component';
 
 import {contadorParaTeste} from '../shared/global-test.model'
+import {ChatService} from './chat.service'
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
-})
+  styleUrls: ['./chat.component.css'],
+  providers: [ChatService]
+})  
 export class ChatComponent implements OnInit {
 
   public historias: Historia[] = HISTORIA
@@ -31,16 +33,27 @@ export class ChatComponent implements OnInit {
   public contadorHistorias: number = contadorParaTeste
   public flagShowButton:boolean = false
 
-  constructor() { }
+  public spans: any[] =[]
 
-  ngOnInit() {
+  constructor(public chatService: ChatService) {
+    this.typed="typed"+chatService.contt
+    //this.spans.push("typed"+this.progresso)
+    for(let x=0;x<this.historias.length;x++){
+      this.spans.push("typed"+x)
+    }
+ }
 
-    this.CarregarHistorias(1,true,0, 1000, "", false,false)
+  ngOnInit() {  
   }
+
+  ngAfterViewInit(){
+    this.CarregarHistorias(1,true, 10, 1000, "", false,false)
+  }
+
   
   private ClicarBotaoDecisao($event){
     this.flagShowButton = false
-
+    
     // $event pega o parametro do emitter
     let iddecisao: number = $event
 
@@ -51,22 +64,46 @@ export class ChatComponent implements OnInit {
     this.countSpan++
 
     //Carrega as linhas com typed passando parametros
-    this.CarregarHistorias(iddecisao,false,0, 500, "", false,true)
+    this.CarregarHistorias(iddecisao,false, 10, 500, "", false,true)
   }
 
   private CarregarHistorias(iddecisao: number,start: boolean,typeSpeed:number, startDelay:number, cursorChar:String,loop:boolean,onStringTyped:boolean){
-    let typed : string
+    let temp: any
+    
     if(start == false){
-      typed = "#typed" + this.progresso
+      //typed = "#typed" + this.progresso
+//      this.spans.push("typed"+this.progresso)
     }
     else{
-      typed = "#typed"
+      //typed = "#typed0"
+
     }
     
-    var selfchat = this
-    var typ = new Typed(typed, {
-      strings: ["<span id='typed"+this.progresso+"'>"+ this.AcharHistoria(iddecisao) +
-                "</span><br><span id='typed"+this.countSpan+"'></span>"],
+    
+    this.typed= "typed" + this.progresso
+    temp = "#typed" + this.progresso
+    
+
+    console.log("spans: " + this.spans)
+    console.log(this.typed +"  /  "+this.progresso, " / temp: " +  temp)
+    var selfchat = this                
+    /*var typ = new Typed(typed, {
+      strings: ["</span><br>"+
+                "<div style='width:26px;float:left;'>"+
+                "<img style='width:26px; height:26px' src='/assets/imgs/roboenport.png'>" + 
+                "</div>"+
+                "<span id='typed"+this.progresso+"'>"+ this.AcharHistoria(iddecisao) +  "</span>"+              
+                "<br>"+
+                "<span id='typed"+this.countSpan+"'>"
+
+              ],
+      */
+      var typ = new Typed(temp,{
+      strings: ["<img style='float:left;width:26px; height:26px' src='/assets/imgs/roboenport.png'>" + 
+                "<div style='margin: 30px'>" +this.AcharHistoria(iddecisao) +"</div>"
+            
+
+    ],
       typeSpeed: typeSpeed,
       startDelay: startDelay,
       cursorChar: cursorChar,
@@ -85,7 +122,6 @@ export class ChatComponent implements OnInit {
   private AcharHistoria(iddecisao: number){
     let texto: string 
     let idinicial = this.historias[this.contadorHistorias].id
-    let indexfinal: number = 1
 
   
     //Se chegou na ultima historia
@@ -98,14 +134,14 @@ export class ChatComponent implements OnInit {
       }
       //senao itera no array no ultimo id de historias ate achar o iddecisao correto
       else{
-        for(indexfinal = 1; this.historias[this.contadorHistorias].iddecisao !== iddecisao;indexfinal++){
+        for(let indexfinal = 1; this.historias[this.contadorHistorias].iddecisao !== iddecisao;indexfinal++){
           this.contadorHistorias++
         }        
         texto = this.historias[this.contadorHistorias].frase
         return texto
       }
     }
-    //Meio da historia 
+    //Fluxo normal da historia
     else{      
       for(let contador:number = this.contadorHistorias; this.historias[contador].id == idinicial; contador++){
 
@@ -116,6 +152,5 @@ export class ChatComponent implements OnInit {
       }
       return texto;
     }
-
   }
 }
