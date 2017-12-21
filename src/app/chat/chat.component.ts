@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 
 //***JS frameworks
-import * as  Typed  from '../../../node_modules/typed.js/lib/typed.min.js';
+//import * as  Typed  from '../../../node_modules/typed.js/lib/typed.min.js';
 import * as  Jquery  from '../../../node_modules/jquery/dist/jquery.min.js';
 declare var jquery:any;
 declare var $ :any;
@@ -15,6 +15,7 @@ import { BotaoDecisaoComponent } from '../botao-decisao/botao-decisao.component'
 
 import {contadorParaTeste} from '../shared/global-test.model'
 import {ChatService} from './chat.service'
+import Typed from '../shared/typed'
 
 @Component({
   selector: 'app-chat',
@@ -27,98 +28,55 @@ export class ChatComponent implements OnInit {
   public historias: Historia[] = HISTORIA
   public botaodecisao: BotaoDecisao[] = BOTAODECISAO
   public progresso:number = 0
-  public typed:any
-  public countSpan:number = 1
   public botaoCarregado: BotaoDecisao[] = []
-  public contadorHistorias: number = contadorParaTeste
-  public flagShowButton:boolean = false
+  public contadorHistorias: number = contadorParaTeste 
+  public typeSpeed : number = 20
 
-  public spans: any[] =[]
+  public spansCont: any[] =[]
+
+  public typed = new Typed()
 
   constructor(public chatService: ChatService) {
-    this.typed="typed"+chatService.contt
-    //this.spans.push("typed"+this.progresso)
-    for(let x=0;x<this.historias.length;x++){
-      this.spans.push("typed"+x)
-    }
+    this.spansCont.push("typed"+ this.progresso)
  }
 
   ngOnInit() {  
   }
 
   ngAfterViewInit(){
-    this.CarregarHistorias(1,true, 10, 1000, "", false,false)
+    this.CarregarHistorias(1,this.typeSpeed)
   }
 
   
-  private ClicarBotaoDecisao($event){
-    this.flagShowButton = false
-    
+  private ClicarBotaoDecisao($event){    
     // $event pega o parametro do emitter
     let iddecisao: number = $event
 
     //incrementa contagem de frases
     this.progresso++
-    
-    //incrementa contagem para os spans (+1 na frente do progresso)
-    this.countSpan++
 
     //Carrega as linhas com typed passando parametros
-    this.CarregarHistorias(iddecisao,false, 10, 500, "", false,true)
+    this.CarregarHistorias(iddecisao,this.typeSpeed)
   }
 
-  private CarregarHistorias(iddecisao: number,start: boolean,typeSpeed:number, startDelay:number, cursorChar:String,loop:boolean,onStringTyped:boolean){
-    let temp: any
-    
-    if(start == false){
-      //typed = "#typed" + this.progresso
-//      this.spans.push("typed"+this.progresso)
-    }
-    else{
-      //typed = "#typed0"
-
+  private CarregarHistorias(iddecisao: number, speed: number){
+    this.typed = new Typed()
+    let texto: string = this.AcharHistoria(iddecisao)
+    if (this.progresso != 0)
+    {
+      this.spansCont.push("typed"+ this.progresso)
     }
     
-    
-    this.typed= "typed" + this.progresso
-    temp = "#typed" + this.progresso
-    
+    /*
+      Dar um time para o push poder bindar no HTML e ao
+      chamar esse metodo ele poder encontrar o elemento ja renderizado
+    */
+    setTimeout(()=>this.typed.typeWriter('typed' + this.progresso, texto, speed),500)
 
-    console.log("spans: " + this.spans)
-    console.log(this.typed +"  /  "+this.progresso, " / temp: " +  temp)
-    var selfchat = this                
-    /*var typ = new Typed(typed, {
-      strings: ["</span><br>"+
-                "<div style='width:26px;float:left;'>"+
-                "<img style='width:26px; height:26px' src='/assets/imgs/roboenport.png'>" + 
-                "</div>"+
-                "<span id='typed"+this.progresso+"'>"+ this.AcharHistoria(iddecisao) +  "</span>"+              
-                "<br>"+
-                "<span id='typed"+this.countSpan+"'>"
-
-              ],
-      */
-      var typ = new Typed(temp,{
-      strings: ["<img style='float:left;width:26px; height:26px' src='/assets/imgs/roboenport.png'>" + 
-                "<div style='margin: 30px'>" +this.AcharHistoria(iddecisao) +"</div>"
-            
-
-    ],
-      typeSpeed: typeSpeed,
-      startDelay: startDelay,
-      cursorChar: cursorChar,
-      loop: loop,
-      onComplete: function(self) {          
-          selfchat.flagShowButton = true
-        },
-      onStringTyped: function(){
-          if (onStringTyped = true){
-            $('html, body').animate({ scrollTop: $(document).height() });
-          }
-        }
-      })
   }
 
+  
+  
   private AcharHistoria(iddecisao: number){
     let texto: string 
     let idinicial = this.historias[this.contadorHistorias].id

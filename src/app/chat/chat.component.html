@@ -3,11 +3,9 @@
     <div id="chatRow" class="row">
       <div id="chatCol" class="col">
         <div id="chat">
-          <div *ngFor="let span of spans" >
-            <p>
-              
-              <span [id]="span" class="typed" ></span>
-            </p>
+          <div *ngFor="let span of spansCont" >
+            <img style='float:left;width:26px; height:26px' src='/assets/imgs/roboenport.jpg'>            
+            <div [id]="span" class="typed" ></div> 
           </div><br>
         </div>
       </div>
@@ -16,5 +14,5 @@
 </div>
 
 <div id="showBtn" class="containerJumbotron">
-  <app-botao-decisao [flagShowButton]="flagShowButton" (ClicarBotaoDecisao)="ClicarBotaoDecisao($event)"></app-botao-decisao>
+  <app-botao-decisao [flagShowButton]="typed.complete" (ClicarBotaoDecisao)="ClicarBotaoDecisao($event)"></app-botao-decisao>
 </div>
