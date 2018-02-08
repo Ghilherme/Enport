@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 //***JS frameworks
 //import * as  Typed  from '../../../node_modules/typed.js/lib/typed.min.js';
@@ -7,48 +8,62 @@ declare var jquery:any;
 declare var $ :any;
 
 //*** My classes
-import Historia from '../shared/historia.model'
-import {HISTORIA} from './historia-mock'
+//import {HISTORIA} from './historia-mock'
 import BotaoDecisao from '../shared/botao-decisao.model'
 import {BOTAODECISAO} from '../botao-decisao/botao-decisao-mock'
-import { BotaoDecisaoComponent } from '../botao-decisao/botao-decisao.component';
+import {BotaoDecisaoComponent} from '../botao-decisao/botao-decisao.component';
 
 import {contadorParaTeste} from '../shared/global-test.model'
 import {ChatService} from './chat.service'
 import Typed from '../shared/typed'
 
+import Historia from '../shared/historia.model'
+import {HistoriaService} from '../shared/historia.service'
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
-  providers: [ChatService]
+  providers: [ChatService, HistoriaService]
 })  
 export class ChatComponent implements OnInit {
 
-  public historias: Historia[] = HISTORIA
+  //public historias: Historia[] = HISTORIA
   public botaodecisao: BotaoDecisao[] = BOTAODECISAO
   public progresso:number = 0
   public botaoCarregado: BotaoDecisao[] = []
   public contadorHistorias: number = contadorParaTeste 
   public typeSpeed : number = 20
-
   public spansCont: any[] =[]
-
   public typed = new Typed()
 
-  constructor(public chatService: ChatService) {
+  public historias: Historia[]
+
+  constructor(public chatService: ChatService, private historiaService: HistoriaService) {
     this.spansCont.push("typed"+ this.progresso)
  }
 
   ngOnInit() {  
+
   }
+
+  public testepesquisa():void{
+    this.historiaService.getHistoria()
+    .subscribe((data: Historia[]) => this.historias = data,
+    error => console.log(error));
+    console.log(this.historias)
+    
+
+    }
 
   ngAfterViewInit(){
     this.CarregarHistorias(1,this.typeSpeed)
   }
 
-  
   private ClicarBotaoDecisao($event){    
+
+    this.testepesquisa()
+
     // $event pega o parametro do emitter
     let iddecisao: number = $event
 
@@ -56,12 +71,16 @@ export class ChatComponent implements OnInit {
     this.progresso++
 
     //Carrega as linhas com typed passando parametros
-    this.CarregarHistorias(iddecisao,this.typeSpeed)
+    //this.CarregarHistorias(iddecisao,this.typeSpeed)
   }
 
   private CarregarHistorias(iddecisao: number, speed: number){
     this.typed = new Typed()
-    let texto: string = this.AcharHistoria(iddecisao)
+    //let texto: string = this.AcharHistoria(iddecisao)
+
+    let texto: string = "texto"
+    
+    
     if (this.progresso != 0)
     {
       this.spansCont.push("typed"+ this.progresso)
@@ -76,7 +95,7 @@ export class ChatComponent implements OnInit {
   }
 
   
-  
+  /*
   private AcharHistoria(iddecisao: number){
     let texto: string 
     let idinicial = this.historias[this.contadorHistorias].id
@@ -111,4 +130,5 @@ export class ChatComponent implements OnInit {
       return texto;
     }
   }
+  */
 }

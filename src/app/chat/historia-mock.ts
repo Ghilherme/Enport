@@ -1,5 +1,5 @@
 import Historia from '../shared/historia.model'
-
+/*
 export const HISTORIA: Historia[] = [
     {id:0,numero:1,frase: "Bom dia,  tudo bem?  Pelo jeito você está a procura de um curso de Inglês diferente, certo?  Então você começou bem. Existe uma frase conhecida que diz assim: 'Toda grande caminhada começa com um primeiro pequeno passo'. Você já está dando o seu primeiro pequeno passo para aprender Inglês.",iddecisao:1},
     {id:1,numero:2,frase: "Antes de começarmos, gostaria de saber o seu nome:",iddecisao:1},
@@ -36,3 +36,4 @@ export const HISTORIA: Historia[] = [
     {id:19,numero:25,frase: "Tenho algumas curiosidades que você ainda não conhece..",iddecisao:2},
     {id:19,numero:26,frase: "Legal, tenho alguns conteúdos bem interessantes para te manter em forma no Inglês.",iddecisao:3},
 ]
+*/

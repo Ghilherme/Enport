@@ -1,3 +1,9 @@
 export default class Historia{
-    constructor(public id:number,public numero:number,public frase:string, public iddecisao:number){}
+        
+        public id: string
+        public frase:string
+        public tipo: string
+        public proximaPergunta: string
+        public respostas: Array<object>
+
 }

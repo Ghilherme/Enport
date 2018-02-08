@@ -1,0 +1,215 @@
+{
+  "historias": [
+    {
+      "H1": {
+        "frase": "Bom dia,  tudo bem?  Pelo jeito você está a procura de um curso de Inglês diferente, certo?  Então você começou bem. Existe uma frase conhecida que diz assim: 'Toda grande caminhada começa com um primeiro pequeno passo'. Você já está dando o seu primeiro pequeno passo para aprender Inglês.",
+        "tipo": "chat",
+        "proximapergunta": "H2",
+        "respostas": []
+      },
+      "H2": {
+        "frase": "Antes de começarmos, gostaria de saber o seu nome:",
+        "tipo": "texto",
+        "proximapergunta": "H3",
+        "respostas": []
+      },
+      "H3": {
+        "frase": "Muito bem, vamos começar? ",
+        "tipo": "pergunta",
+        "proximapergunta": "H4",
+        "respostas": []
+      },
+      "H4": {
+        "frase": "Ahhh, desculpe, acabei esquecendo de me apresentar. Eu sou o Leo, seu novo professor virtual.",
+        "tipo": "chat",
+        "proximapergunta": "H5",
+        "respostas": []
+      },
+      "H5": {
+        "frase": "Eu vou te ensinar Inglês de uma maneira completamente diferente. Totalmente interativa, o que você acha disso?",
+        "tipo": "pergunta",
+        "proximapergunta": null,
+        "respostas": [
+          {
+            "opt": "a",
+            "titulo": "Gostei da ideia",
+            "proximapergunta": "H6"
+          },
+          {
+            "opt": "b",
+            "titulo": "Você ainda não me convenceu",
+            "proximapergunta": "H7"
+          }
+        ]
+      },
+      "H6": {
+        "frase": "Legal, eu estou muito ansioso para começar!",
+        "tipo": "chat",
+        "proximapergunta": "H8",
+        "respostas": []
+      },
+      "H7": {
+        "frase": "Eu te entendo perfeitamente. Mas fica tranquilo, muitas pessoas já tentaram de várias formas mas ainda não conseguiram aprender de maneira efetiva. Por isso eu te peço um voto de confiança. Gostaria que você experimentasse o nosso método por pelo menos 4 semanas. Posso contar com você?",
+        "tipo": "pergunta",
+        "proximapergunta": null,
+        "respostas": [
+          {
+            "opt": "a",
+            "titulo": "Sim!",
+            "proximapergunta": "H6"
+          },
+          {
+            "opt": "b",
+            "titulo": "Não.",
+            "proximapergunta": "H9"
+          }
+        ]
+      },
+      "H8": {
+        "frase": "Antes de começar, eu gostaria de te contar algumas coisas sobre o nosso método.",
+        "tipo": "chat",
+        "proximapergunta": "H10",
+        "respostas": []
+      },
+      "H9": {
+        "frase": "É uma pena. De qualquer forma, nunca desista dos seus sonhos e não esqueça o que Steve Jobs costumava dizer: 'Não há atalhos para a excelência'. Também não se esqueça, se um dia quiser estudar Inglês de uma maneira completamente diferente, me procure na App Store ou na Google Play. ",
+        "tipo": "fim",
+        "proximapergunta": null,
+        "respostas": []
+      },
+      "H10": {
+        "frase": "Estudar Inglês requer alguns cuidados importantes, um deles é ter o contato com Inglês TODOS os dias. ",
+        "tipo": "chat",
+        "proximapergunta": "H11",
+        "respostas": []
+      },
+      "H11": {
+        "frase": "Mas para isso você não precisa perder horas estudando, o que eu te peço é que você pratique por volta de 20 min por dia, ok? ",
+        "tipo": "chat",
+        "proximapergunta": "H12",
+        "respostas": []
+      },
+      "H12": {
+        "frase": "Existem várias formas de ter contato com Inglês, como Seriados, filmes, músicas, livros, aplicativos... O importante é que você evolua um pouquinho todos os dias. ",
+        "tipo": "chat",
+        "proximapergunta": "H13",
+        "respostas": []
+      },
+      "H13": {
+        "frase": "Toda segunda-feira você terá uma semana de estudo disponível. Você só consegue passar para a próxima semana se completar a anterior. ",
+        "tipo": "chat",
+        "proximapergunta": "H14",
+        "respostas": []
+      },
+      "H14": {
+        "frase": "Sábado e Domingo você terá uma prova disponível. Não é obrigatório, mas se fizer, ganhará alguns pontos para trocar por brindes futuramente.",
+        "tipo": "chat",
+        "proximapergunta": "H15",
+        "respostas": []
+      },
+      "H15": {
+        "frase": "O curso é de graça, porém se você não quiser seguir o nosso roteiro, poderá comprar os módulos separadamente ou até o curso inteiro.",
+        "tipo": "chat",
+        "proximapergunta": "H16",
+        "respostas": []
+      },
+      "H16": {
+        "frase": "Fique tranquilo, você não será bloqueado para usar o app em nenhum momento mesmo que escolha não pagar.",
+        "tipo": "chat",
+        "proximapergunta": "H17",
+        "respostas": []
+      },
+      "H17": {
+        "frase": "Agora eu gostaria de saber mais sobre você. Quantas vezes você já tentou aprender Inglês?",
+        "tipo": "pergunta",
+        "proximapergunta": null,
+        "respostas": [
+          {
+            "opt": "a",
+            "titulo": "0",
+            "proximapergunta": "H18"
+          },
+          {
+            "opt": "b",
+            "titulo": "1",
+            "proximapergunta": "H19"
+          },
+          {
+            "opt": "c",
+            "titulo": "2+",
+            "proximapergunta": "H20"
+          },
+          {
+            "opt": "d",
+            "titulo": "48+",
+            "proximapergunta": "H21"
+          }
+        ]
+      },
+      "H18": {
+        "frase": "Nunca é tarde para começar :D",
+        "tipo": "chat",
+        "proximapergunta": "H22",
+        "respostas": []
+      },
+      "H19": {
+        "frase": "Que bom que você já teve uma iniciativa.",
+        "tipo": "chat",
+        "proximapergunta": "H22",
+        "respostas": []
+      },
+      "H20": {
+        "frase": "Que bom que você ainda não desistiu. Agora vai dar certo!",
+        "tipo": "chat",
+        "proximapergunta": "H22",
+        "respostas": []
+      },
+      "H21": {
+        "frase": "Thomas Edison falhou mais de mil vezes tentando criar a lâmpada, ou seja, você está muito bem ;)",
+        "tipo": "chat",
+        "proximapergunta": "H22",
+        "respostas": []
+      },
+      "H22": {
+        "frase": "Ok, Você se considera em qual nível de Inglês? Não se preocupe, você poderá alterar esse item futuramente.",
+        "tipo": "chat",
+        "proximapergunta": null,
+        "respostas": [
+          {
+            "opt": "a",
+            "titulo": "Básico",
+            "proximapergunta": "H23"
+          },
+          {
+            "opt": "b",
+            "titulo": "Intermediário",
+            "proximapergunta": "H24"
+          },
+          {
+            "opt": "c",
+            "titulo": "Avançado",
+            "proximapergunta": "H25"
+          }
+        ]
+      },
+      "H23": {
+        "frase": "Tenho muitas coisas legais para te ensinar!",
+        "tipo": "fim",
+        "proximapergunta": null,
+        "respostas": []
+      },
+      "H24": {
+        "frase": "Tenho algumas curiosidades que você ainda não conhece..",
+        "tipo": "fim",
+        "proximapergunta": null,
+        "respostas": []
+      },
+      "H25": {
+        "frase": "Legal, tenho alguns conteúdos bem interessantes para te manter em forma no Inglês.",
+        "tipo": "fim",
+        "proximapergunta": null,
+        "respostas": []
+      }
+    }
+  ]
+}
