@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import  Historia  from './historia.model';
+import  HistoriaModel  from './historia.model';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -12,7 +12,7 @@ export class HistoriaService {
 
     constructor(private http: Http) { }
     
-    public getHistoria(): Observable<Historia[]> {
+    getHistoria(): Observable<HistoriaModel[]> {
             return this.http.get(this.Url)
             .map((response: Response) => response.json())
             //.do(data => console.log('All: ' + JSON.stringify(data)))

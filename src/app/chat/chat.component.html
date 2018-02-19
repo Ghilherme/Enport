@@ -14,5 +14,9 @@
 </div>
 
 <div id="showBtn" class="containerJumbotron">
-  <app-botao-decisao [flagShowButton]="typed.complete" (ClicarBotaoDecisao)="ClicarBotaoDecisao($event)"></app-botao-decisao>
+  <app-botao-decisao
+     [historiaObjeto]="historiaObjeto"
+     [montarInteracao]="typed.complete"
+     (ClicarBotaoResposta)="ClicarBotaoResposta($event)">
+  </app-botao-decisao>
 </div>

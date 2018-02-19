@@ -8,17 +8,14 @@ declare var jquery:any;
 declare var $ :any;
 
 //*** My classes
-//import {HISTORIA} from './historia-mock'
-import BotaoDecisao from '../shared/botao-decisao.model'
-import {BOTAODECISAO} from '../botao-decisao/botao-decisao-mock'
 import {BotaoDecisaoComponent} from '../botao-decisao/botao-decisao.component';
 
-import {contadorParaTeste} from '../shared/global-test.model'
 import {ChatService} from './chat.service'
 import Typed from '../shared/typed'
 
-import Historia from '../shared/historia.model'
+import HistoriaModel from '../shared/historia.model'
 import {HistoriaService} from '../shared/historia.service'
+import { identifierName } from '@angular/compiler';
 
 @Component({
   selector: 'app-chat',
@@ -28,107 +25,81 @@ import {HistoriaService} from '../shared/historia.service'
 })  
 export class ChatComponent implements OnInit {
 
-  //public historias: Historia[] = HISTORIA
-  public botaodecisao: BotaoDecisao[] = BOTAODECISAO
   public progresso:number = 0
-  public botaoCarregado: BotaoDecisao[] = []
-  public contadorHistorias: number = contadorParaTeste 
   public typeSpeed : number = 20
   public spansCont: any[] =[]
   public typed = new Typed()
 
-  public historias: Historia[]
+  public historiasJSON: HistoriaModel[]
+  public historiaObjeto: HistoriaModel
 
   constructor(public chatService: ChatService, private historiaService: HistoriaService) {
     this.spansCont.push("typed"+ this.progresso)
  }
 
+ //Chama JSON HTTP Async ao iniciar
   ngOnInit() {  
-
+    this.ServiceRecuperaJSONHistorias()
   }
 
-  public testepesquisa():void{
+  //objeto global historias sera carregado
+  private ServiceRecuperaJSONHistorias():void{
     this.historiaService.getHistoria()
-    .subscribe((data: Historia[]) => this.historias = data,
+    .subscribe((data: HistoriaModel[]) =>{
+       this.historiasJSON = data
+       /*
+        Chamar metodo pra carregar Historias somente apos o http request responder o JSON
+        primeiro parametro sempre ira passar o primeiro ID onde começa interação
+       */
+       this.CarregarHistorias(this.historiasJSON[0].id,this.typeSpeed)
+      },
     error => console.log(error));
-    console.log(this.historias)
-    
-
-    }
-
-  ngAfterViewInit(){
-    this.CarregarHistorias(1,this.typeSpeed)
   }
-
-  private ClicarBotaoDecisao($event){    
-
-    this.testepesquisa()
-
+  
+  public ClicarBotaoResposta($event){    
     // $event pega o parametro do emitter
-    let iddecisao: number = $event
+    let idProximaHistoria: string = $event
 
     //incrementa contagem de frases
     this.progresso++
 
     //Carrega as linhas com typed passando parametros
-    //this.CarregarHistorias(iddecisao,this.typeSpeed)
+    this.CarregarHistorias(idProximaHistoria,this.typeSpeed)
   }
 
-  private CarregarHistorias(iddecisao: number, speed: number){
+  private CarregarHistorias(idProximaHistoria: string, speed: number){
+    // Cria objeto que faz efeito de escrita
     this.typed = new Typed()
-    //let texto: string = this.AcharHistoria(iddecisao)
 
-    let texto: string = "texto"
+    console.log("idproximahistoria: " + idProximaHistoria)
+    //retorna objeto do tipo HistoriaModel com as propriedades
+    this.historiaObjeto = this.RecuperaHistoria(idProximaHistoria)
     
-    
+    //Incrementa mais objetos <span> no array para aparecer no HTML
     if (this.progresso != 0)
     {
       this.spansCont.push("typed"+ this.progresso)
     }
+
+    this.typed.complete = false
     
     /*
       Dar um time para o push poder bindar no HTML e ao
       chamar esse metodo ele poder encontrar o elemento ja renderizado
     */
-    setTimeout(()=>this.typed.typeWriter('typed' + this.progresso, texto, speed),500)
-
+    setTimeout(()=>this.typed.typeWriter('typed' + this.progresso, this.historiaObjeto.frase, speed),500)
   }
 
-  
   /*
-  private AcharHistoria(iddecisao: number){
-    let texto: string 
-    let idinicial = this.historias[this.contadorHistorias].id
-
-  
-    //Se chegou na ultima historia
-    //se é o ultimo ID de historias -- tratamento especial para final com varios historias possiveis
-    if(this.historias[this.contadorHistorias].id === this.historias[this.historias.length -1].id){
-      //Se é o ultimo Index do array retorna o ultimo texto normalmente
-      if(this.historias[this.contadorHistorias] === this.historias[this.historias.length-1]){
-        texto= this.historias[this.contadorHistorias].frase
-        return texto;
+    Recupera qual a historia com base no ID
+  */
+  private RecuperaHistoria(idProximaHistoria: string): HistoriaModel{
+    for(let i = 0; i < this.historiasJSON.length; i++){
+      if(this.historiasJSON[i].id == idProximaHistoria){
+        console.log("recuperou historia: "+this.historiasJSON[i].frase)
+        return this.historiasJSON[i]
       }
-      //senao itera no array no ultimo id de historias ate achar o iddecisao correto
-      else{
-        for(let indexfinal = 1; this.historias[this.contadorHistorias].iddecisao !== iddecisao;indexfinal++){
-          this.contadorHistorias++
-        }        
-        texto = this.historias[this.contadorHistorias].frase
-        return texto
-      }
-    }
-    //Fluxo normal da historia
-    else{      
-      for(let contador:number = this.contadorHistorias; this.historias[contador].id == idinicial; contador++){
-
-        if(this.historias[contador].iddecisao == iddecisao){
-          texto = this.historias[contador].frase
-        }
-        this.contadorHistorias++
-      }
-      return texto;
     }
   }
-  */
+
 }

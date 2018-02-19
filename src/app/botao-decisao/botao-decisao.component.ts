@@ -5,9 +5,9 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { fadeInAnimation } from '../_animations/index';
 
 import BotaoDecisao from '../shared/botao-decisao.model'
-import {BOTAODECISAO} from '../botao-decisao/botao-decisao-mock'
 
-import {contadorParaTeste} from '../shared/global-test.model'
+import HistoriaModel from '../shared/historia.model'
+import {HistoriaService} from '../shared/historia.service'
 
 @Component({
   selector: 'app-botao-decisao',
@@ -26,28 +26,67 @@ import {contadorParaTeste} from '../shared/global-test.model'
         ])
       ]
     )
-  ]
+  ],
+  providers: [HistoriaService]
 })
 export class BotaoDecisaoComponent implements OnInit {
 
-  @Output() onVoted = new EventEmitter<boolean>();
-  @Output() ClicarBotaoDecisao = new EventEmitter<number>();
-  public cargaDeBotoes: BotaoDecisao[] = BOTAODECISAO
+  @Output() ClicarBotaoResposta = new EventEmitter<string>();
+  
+  @Input() montarInteracao: boolean
+
+  @Input() historiaObjeto: HistoriaModel
+
   public botaoCarregado : BotaoDecisao[] =[]
-  public ContadorProgressoBotao: number = contadorParaTeste
+  public ContadorProgressoBotao: number = 0
+  public historias: HistoriaModel[]
 
-  @Input() flagShowButton: boolean
+  public mostrarBotoes: boolean = false
 
-  constructor() { }
+
+  constructor(private historiaService: HistoriaService) { }
 
   ngOnInit() {
   }
 
+  //Carrega botoesa partir desse metodo
   ngOnChanges(){
-    if (this.flagShowButton ==true){this.CarregarBotao()}    
+    if (this.montarInteracao ==true){
+      this.MontarInteracaoHistoria()
+    }    
   }
 
+  private MontarInteracaoHistoria(){
+    switch(this.historiaObjeto.tipo){
+      case("chat"):
+        //proxima historia
+        console.log("objeto: " + this.historiaObjeto.proximapergunta)
+        this.verificaProgresso(this.historiaObjeto.proximapergunta)
+
+        break;
+      case("pergunta"):
+        //criar botões de resposta
+
+        break;
+
+      case("texto"):
+        //Criar txtbox e guardar input
+
+        break;
+
+      case("fim"):
+        //Final da historia
+
+        break;
+
+    }
+
+  }
+
+
+  /*
   public CarregarBotao(){
+    console.log(this.historiaObjeto)
     
     //Limpa array para poder iniciar novamente a construção de botões
     if(this.botaoCarregado.length !== 0){
@@ -59,8 +98,8 @@ export class BotaoDecisaoComponent implements OnInit {
     if(this.cargaDeBotoes[this.ContadorProgressoBotao].id === this.cargaDeBotoes[this.cargaDeBotoes.length-1].id){
       this.botaoCarregado.push({
         id: 0,
-        texto: 'Fim!',
-        iddecisao: 0
+        frase: 'Fim!',
+        idProximaPergunta: 0
       })
     }
     else{
@@ -68,16 +107,18 @@ export class BotaoDecisaoComponent implements OnInit {
 
         this.botaoCarregado.push({
           id: this.cargaDeBotoes[contador].id,
-          texto: this.cargaDeBotoes[contador].texto,
-          iddecisao: this.cargaDeBotoes[contador].iddecisao
+          frase: this.cargaDeBotoes[contador].frase,
+          idProximaPergunta: this.cargaDeBotoes[contador].idProximaPergunta
         })
         this.ContadorProgressoBotao++
       }
     }
   }
+  */
 
-  public verificaProgresso(iddecisao :number) {
-    this.ClicarBotaoDecisao.emit(iddecisao)
+  public verificaProgresso(idProximaHistoria :string) {
+    console.log("Botao Verifica progresso: " + idProximaHistoria)
+    this.ClicarBotaoResposta.emit(idProximaHistoria)
   }
 
 }
